@@ -2,7 +2,6 @@
 
 from ayx import Package
 from ayx import Alteryx
-import tableauhyperapi as THA
 import tableauserverclient as TSC
 import pandas as pd
 import numpy as np
