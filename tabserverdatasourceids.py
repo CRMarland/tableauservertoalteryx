@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 import tableauserverclient as TSC
 
-tableau_auth = TSC.PersonalAccessTokenAuth('', ', site_id=’’)
-
-server = TSC.Server('https://scv-tableau.live.tools.bbc.co.uk/', use_server_version=True)
+tableau_auth = TSC.TableauAuth('USERNAME', 'PASSWORD', site='SITE')
+server = TSC.Server('https://SERVER-URL')
 
 server.auth.sign_in(tableau_auth)
 
