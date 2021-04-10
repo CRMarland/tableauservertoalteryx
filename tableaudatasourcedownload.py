@@ -34,16 +34,25 @@ with zipfile.ZipFile(data_loc, 'r') as zip_ref:
 
 # Create a data_path variable that points to the location of the extracted hyper file
 # created by the previous step.
-# List the files in that location which should give us the name of the hyper file.
+# Get the name of the original download and compare that to the files in the 
+# unzipped folder - it may have a suffix. 
 
 hyper_location = filepath + '\Data\Extracts'
 
-file_list = [f for f in listdir(hyper_location) if isfile(join(hyper_location, f))]
+tdsx_name = re.match(r'.*\\(.*)\.tdsx', data_loc)[1]
+
+hypers_list = os.listdir(hyper_location)
+
+for item in hypers_list:
+    tdsx_name_len = len(tdsx_name)
+    match_item = item[0:tdsx_name_len]
+    if match_item == tdsx_name:
+        hyper = item
 
 # Combine the hyper location with the name of the hyper file to create the full path to
 # use in an input data tool
 
-final_filepath = hyper_location + '\\' + file_list[0]
+final_filepath = hyper_location + '\\' + hyper
 
 # Put the final_filepath variable into a dict so it can be turned into a df and exported
 # to Alteryx canvas
